@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeferson Vinicius | Home</title>
+    <meta
+        name="description"
+        content="Pagina pessoal de Jeferson Vinicius com trajetoria, valores e formas de contato."
+    />
+    <link href="styles/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="logo" href="index.html">JV</a>
+            <nav aria-label="Navegacao principal">
+                <ul class="nav-list">
+                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <div class="hero-copy">
+                <p class="tag">Trajetoria real. Evolucao constante.</p>
+                <h1 id="user-name">Jeferson Vinicius</h1>
+                <p class="lead">
+                    Uma pagina para contar minha caminhada, meus valores e a energia que coloco
+                    em cada etapa da minha evolucao profissional e pessoal.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="about.html">Conhecer minha historia</a>
+                    <a class="btn btn-outline" href="contact.html">Falar comigo</a>
+                </div>
+            </div>
+
+            <figure class="hero-media">
+                <img
+                    src="./imagens/maxresdefault.jpg"
+                    alt="Jeferson em momento marcante da sua jornada"
+                />
+                <figcaption>Disciplina, consistencia e visao de longo prazo.</figcaption>
+            </figure>
+        </section>
+
+        <section class="highlights container">
+            <h2>O que me define</h2>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>Inicio no mundo Tech</h3>
+                    <p>
+                        Entrei na tecnologia com curiosidade e vontade de aprender todos os dias.
+                    </p>
+                </article>
+                <article class="card">
+                    <h3>Determinacao</h3>
+                    <p>
+                        Persistencia para conquistar a primeira oportunidade e continuar evoluindo.
+                    </p>
+                </article>
+                <article class="card">
+                    <h3>Lealdade</h3>
+                    <p>
+                        Relacoes construidas com respeito, comprometimento e visao de parceria.
+                    </p>
+                </article>
+                <article class="card">
+                    <h3>Comunicacao</h3>
+                    <p>
+                        Facilidade de relacionamento para conectar pessoas, ideias e resultados.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta-band">
+            <div class="container cta-band-content">
+                <p>Quer acompanhar de perto minha evolucao e trocar uma ideia?</p>
+                <a class="btn btn-dark" href="contact.html">Ir para contato</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-wrap">
+            <p>2026 - <span id="footer-user-name">Jeferson Vinicius</span></p>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Sobre</a></li>
+                <li><a href="contact.html">Contato</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script type="module">
+        const userNameElement = document.getElementById('user-name');
+        const textoElement = document.querySelector('.lead');
+        const footerUserNameElement = document.getElementById('footer-user-name');
+
+        try {
+            const response = await fetch('/dados');
+
+            if (!response.ok) {
+                throw new Error(`Falha ao carregar dados: ${response.status}`);
+            }
+
+            const dados = await response.json();
+
+            if (dados.nome) {
+                userNameElement.textContent = dados.nome;
+                footerUserNameElement.textContent = dados.nome;
+                document.title = `${dados.nome} | Home`;
+            }
+            
+            if (dados.texto) {
+                textoElement.textContent = dados.texto;
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    </script>
+</body>
+</html>
